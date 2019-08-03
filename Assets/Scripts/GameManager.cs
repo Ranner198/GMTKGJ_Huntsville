@@ -31,10 +31,11 @@ public class GameManager : MonoBehaviour
     	NewLevel();
     }
 
-	public static void Kill()
+	public void Kill()
 	{
-		//Bruh
-		print("Boom Head shot!");
+        currentKills++;
+        //Bruh
+        print("Boom Head shot!");
 	}
 
     private void Update(){
@@ -47,7 +48,6 @@ public class GameManager : MonoBehaviour
     		ResetLevel();
     	if(Input.GetKeyDown(KeyCode.K)){
     		enemyAi[Random.Range(0,enemyAi.Count)].Kill();
-    		currentKills += 1;
     	}
     	if(Input.GetKeyDown(KeyCode.N)){
     		CompleteLevel();
@@ -83,13 +83,11 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartBulletTime(){
-    	StartCoroutine(BulletTime(0.75f));
+        //print(currentKills + " " + enemyAi.Count / 2);
+        if (currentKills >= enemyAi.Count - 1) {
+            StartCoroutine(BulletTime(0.75f));
+        }
     }
-
-	public void KilledEnemy()
-	{
-		Debug.Log("BOOM HEADSHOT");
-	}
 
     private void ResetLevel(){
     	for(int i=0;i<enemyAi.Count;i++){
@@ -103,7 +101,13 @@ public class GameManager : MonoBehaviour
 
     private IEnumerator BulletTime(float timer){
     	Time.timeScale = 0.3f;
-    	yield return new WaitForSeconds(timer);
+        while(timer > 0) {
+            timer -= Time.deltaTime;
+            if(currentKills == enemyAi.Count) {
+                break;
+            }
+            yield return null;
+        }
     	Time.timeScale = 1f;
     }
 
