@@ -7,11 +7,13 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement playerInstance;
     public float speed;
+    public bool dead;
+    public Rigidbody rb;
 
     private Vector3 movement;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(playerInstance != null && playerInstance != this)
         {
@@ -21,14 +23,22 @@ public class PlayerMovement : MonoBehaviour
         {
             playerInstance = this;
         }
+
+        movement.y = transform.position.y;
+    }
+
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        movement += new Vector3((float)Input.GetAxis("Horizontal"), 0.0f, (float)Input.GetAxis("Vertical")) * speed;
+        movement += new Vector3((float)Input.GetAxis("Horizontal"), 0.0f, (float)Input.GetAxis("Vertical")) * speed * Time.deltaTime;
 
-        playerInstance.transform.position = movement;
+        rb.MovePosition(movement);
+        //rb.velocity = movement * Time.deltaTime;
 
     }
 }

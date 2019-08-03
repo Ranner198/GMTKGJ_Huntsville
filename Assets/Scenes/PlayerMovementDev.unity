@@ -133,6 +133,7 @@ GameObject:
   - component: {fileID: 41119317}
   - component: {fileID: 41119316}
   - component: {fileID: 41119315}
+  - component: {fileID: 41119320}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -225,6 +226,29 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &41119320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 41119314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f29c8fe6aa1df640ab21bb27d2e996a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullet: {fileID: 41119314}
+  shootingPoint: {fileID: 0}
+  bulletCasing: {fileID: -927199367670048503, guid: 345833bcf50204748ac35e98a9bbf739,
+    type: 3}
+  bulletSpeed: 100
+  lm:
+    serializedVersion: 2
+    m_Bits: 0
+  YOffset: 0.5
+  player: {fileID: 41119314}
+  cam: {fileID: 1356828071}
 --- !u!1 &884914915
 GameObject:
   m_ObjectHideFlags: 0
