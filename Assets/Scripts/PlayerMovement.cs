@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     private Vector3 movement;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if(playerInstance != null && playerInstance != this)
         {
@@ -21,6 +21,11 @@ public class PlayerMovement : MonoBehaviour
         {
             playerInstance = this;
         }
+    }
+
+    void Start()
+    {
+
     }
 
     // Update is called once per frame
