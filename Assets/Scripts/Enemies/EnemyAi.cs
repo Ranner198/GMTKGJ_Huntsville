@@ -21,14 +21,16 @@ public class EnemyAi : MonoBehaviour {
     private Vector3 playerLastPos;
     private NavMeshAgent agent;
 
-    private Transform startTransform;
+    private Vector3 startPos;
+    private Quaternion startRot;
 
     private void Start() {
         agent = GetComponent<NavMeshAgent>();
         agent.destination = player.position;
         playerLastPos = player.position;
 
-        startTransform = transform;
+        startPos = transform.position;
+        startRot = transform.rotation;
     }
 
     private void Update() {
@@ -39,11 +41,14 @@ public class EnemyAi : MonoBehaviour {
     }
 
     public void Respawn() {
-        transform.position = startTransform.position;
-        transform.rotation = startTransform.rotation;
+        transform.position = startPos;
+        transform.rotation = startRot;
+        agent.enabled = true;
+        agent.destination = player.position;
     }
 
     public void Kill() {
+        agent.enabled = false;
         transform.position = new Vector3(-1000, -1000, -1000);
     }
 
