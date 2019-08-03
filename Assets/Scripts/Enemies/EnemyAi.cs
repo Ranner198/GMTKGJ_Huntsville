@@ -16,6 +16,8 @@ public class EnemyAi : MonoBehaviour {
     }
     #endregion
 
+    public GameObject deathExplosionPrefab;
+
     private PlayerMovement player;
     private Vector3 playerLastPos;
     private NavMeshAgent agent;
@@ -52,6 +54,8 @@ public class EnemyAi : MonoBehaviour {
     }
 
     public void Kill() {
+        Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
+
         agent.enabled = false;
         transform.position = new Vector3(-1000, -1000, -1000);
         dead = true;

@@ -111,7 +111,7 @@ MonoBehaviour:
   shootingPoint: {fileID: 5336497418367804773}
   bulletCasing: {fileID: 4584990788586679598, guid: 7533481da12f2ef4ba97ce7b784ff1f0,
     type: 3}
-  bulletSpeed: 100
+  bulletSpeed: 20
   lm:
     serializedVersion: 2
     m_Bits: 256

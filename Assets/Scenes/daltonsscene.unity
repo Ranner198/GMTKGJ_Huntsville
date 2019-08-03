@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -288,7 +288,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -409,11 +409,11 @@ MonoBehaviour:
   levelList:
   - levelPrefab: {fileID: 7709149102427298470, guid: c6c5a3b3ef9883d47a9ac15c49551c31,
       type: 3}
-    killsRequired: 0
+    killsRequired: 3
     spawnPoint: {x: -5, y: 0}
   - levelPrefab: {fileID: 4058131729429900716, guid: 485ba525bccea4849830dc95eff31621,
       type: 3}
-    killsRequired: 0
+    killsRequired: 2
     spawnPoint: {x: 0, y: 0}
   enemyAi: []
   player: {fileID: 0}
@@ -492,7 +492,7 @@ PrefabInstance:
     - target: {fileID: 5336497418106090746, guid: 27598beb064697642b46b21966c7e424,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5336497418106090746, guid: 27598beb064697642b46b21966c7e424,
         type: 3}

@@ -24,6 +24,10 @@ public class BulletLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other) {
         if (other.GetComponent<EnemyAi>()) {
+            /*if (GameManager.instance.OnLastKill()) {
+                Time.timeScale = 1f;
+                Time.fixedDeltaTime = 0.02f * Time.timeScale;
+            }*/
             other.GetComponent<EnemyAi>().Kill();
         }
     }
@@ -40,14 +44,14 @@ public class BulletLogic : MonoBehaviour
         rb.velocity = dir * speed;
     }
 
+    List<Transform> enemiesInLine = new List<Transform>();
+
     void PredictTrajectory() {
         Vector3 movingPosition = transform.position;
         Vector3 startingPosition = movingPosition;
         Vector3 direction = transform.forward;
 
-        //LayerMask wall = LayerMask.GetMask("Wall");
-
-        float maxRayDistance = 1f;
+        float maxRayDistance = 2f;
 
         float totalDistance = 0f;
         float maxViewDistance = 10f;
@@ -57,8 +61,8 @@ public class BulletLogic : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-                    if(GameManager.instance.currentKills >= GameManager.instance.enemyAi.Count - 1) {
-                        Camera.main.transform.position = (transform.position + hit.point) / 2 + new Vector3(0, 5, -5);
+                    if (!enemiesInLine.Contains(hit.transform)) {
+                        enemiesInLine.Add(hit.transform);
                     }
                     movingPosition += direction * maxRayDistance;
                     totalDistance += maxRayDistance;
@@ -66,7 +70,11 @@ public class BulletLogic : MonoBehaviour
                         break;
                     }
                     Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
-                    GameManager.instance.StartBulletTime();
+                    /*if(GameManager.instance.OnLastKill()) {
+                        GameManager.instance.SetTimeScaleBasedOnBullet(Vector3.Distance(transform.position, hit.point));
+                        Camera.main.transform.position = (transform.position + hit.point) / 2 + new Vector3(0, 5, 0);
+                        GameManager.instance.StartBulletTime();
+                    }*/
                 }
                 else {
                     if (totalBounces == maxBounces - 1) {
@@ -84,6 +92,8 @@ public class BulletLogic : MonoBehaviour
                 }
             }
             else {
+                enemiesInLine.Clear();
+                GameManager.instance.ResetTimeAndCamera();
                 movingPosition += direction * maxRayDistance;
                 totalDistance += maxRayDistance;
                 if (totalDistance >= maxViewDistance) {

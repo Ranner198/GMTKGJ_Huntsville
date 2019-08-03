@@ -34,8 +34,6 @@ public class GameManager : MonoBehaviour
 	public void Kill()
 	{
         currentKills++;
-        //Bruh
-        print("Boom Head shot!");
 	}
 
     private void Update(){
@@ -54,11 +52,13 @@ public class GameManager : MonoBehaviour
     	}
     }
 
+    int currentLevelIndex = -1;
+
     public void NewLevel(){
 
         doorOpened = false;
 
-    	// if not the start level
+        /*// if not the start level
     	if(levelsCompleted > 0){
     		//choose a random level
     		if(levelList.Count > 0){
@@ -69,7 +69,18 @@ public class GameManager : MonoBehaviour
     	} else{
     		//active level should already be the start room
     		level = activeLevel.levelPrefab;
-    	}
+    	}*/
+
+        if(currentLevelIndex == -1) {
+            level = activeLevel.levelPrefab;
+        }
+        else {
+            Destroy(level);
+            activeLevel = levelList[currentLevelIndex];
+            level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
+        }
+        currentLevelIndex++;
+
     	//get enemies
     	enemyAi = EnemyAi.instances;
     	totalKills += currentKills;
@@ -83,10 +94,7 @@ public class GameManager : MonoBehaviour
     }
 
     public void StartBulletTime(){
-        //print(currentKills + " " + enemyAi.Count / 2);
-        if (currentKills >= enemyAi.Count - 1) {
-            StartCoroutine(BulletTime(0.75f));
-        }
+        StartCoroutine(BulletTime(0.75f));
     }
 
     private void ResetLevel(){
@@ -99,16 +107,42 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public bool OnLastKill() {
+        if(currentKills == activeLevel.killsRequired - 1) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
+    public void SetTimeScaleBasedOnBullet(float distanceBetweenBulletAndEnemy) {
+        if(distanceBetweenBulletAndEnemy < 0.5f) {
+            Time.timeScale = 0.01f;
+        }
+        else if(distanceBetweenBulletAndEnemy < 1f) {
+            Time.timeScale = 0.1f;
+        }
+        else if(distanceBetweenBulletAndEnemy < 1.5f) {
+            Time.timeScale = 0.2f;
+        }
+        else {
+            Time.timeScale = 0.3f;
+        }
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        print(Time.timeScale);
+    }
+
     private IEnumerator BulletTime(float timer){
-    	Time.timeScale = 0.3f;
         while(timer > 0) {
             timer -= Time.deltaTime;
-            if(currentKills == enemyAi.Count) {
-                break;
+            if(currentKills >= activeLevel.killsRequired) {
+                timer = -1f;
             }
             yield return null;
         }
-    	Time.timeScale = 1f;
+        Camera.main.transform.position = new Vector3(0, 10, -2);
+    	//Time.timeScale = 1f;
     }
 
     private void OpenDoor()
@@ -117,6 +151,12 @@ public class GameManager : MonoBehaviour
         {
             doorOpened = true;
         }
+    }
+
+    public void ResetTimeAndCamera() {
+        Time.timeScale = 1f;
+        Time.fixedDeltaTime = 0.02f * Time.timeScale;
+        Camera.main.transform.position = new Vector3(0, 10, -2);
     }
 }
 
