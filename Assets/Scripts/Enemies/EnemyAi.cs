@@ -55,7 +55,7 @@ public class EnemyAi : MonoBehaviour {
         agent.enabled = false;
         transform.position = new Vector3(-1000, -1000, -1000);
         dead = true;
-        GameManager.Kill();
+        GameManager.instance.Kill();
     }
 
     public void OnDestroy() {

@@ -45,7 +45,7 @@ public class BulletLogic : MonoBehaviour
         Vector3 startingPosition = movingPosition;
         Vector3 direction = transform.forward;
 
-        LayerMask wall = LayerMask.GetMask("Wall");
+        //LayerMask wall = LayerMask.GetMask("Wall");
 
         float maxRayDistance = 1f;
 
@@ -55,19 +55,31 @@ public class BulletLogic : MonoBehaviour
         while(totalDistance < maxViewDistance){
             Ray ray = new Ray(movingPosition, direction);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, maxRayDistance, wall)) {
-                if(totalBounces == maxBounces - 1) {
-                    Debug.DrawLine(startingPosition, hit.point, Color.blue, 0f, false);
-                    break;
+            if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
+                if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
+                    Camera.main.transform.position = (transform.position + hit.point) / 2;
+                    movingPosition += direction * maxRayDistance;
+                    totalDistance += maxRayDistance;
+                    if (totalDistance >= maxViewDistance) {
+                        break;
+                    }
+                    Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
+                    GameManager.instance.StartBulletTime();
                 }
-                direction = Vector3.Reflect(direction, hit.normal);
-                movingPosition = hit.point;
-                totalDistance += Vector3.Distance(startingPosition, movingPosition);
-                if(totalDistance >= maxViewDistance) {
-                    break;
+                else {
+                    if (totalBounces == maxBounces - 1) {
+                        Debug.DrawLine(startingPosition, hit.point, Color.blue, 0f, false);
+                        break;
+                    }
+                    direction = Vector3.Reflect(direction, hit.normal);
+                    movingPosition = hit.point;
+                    totalDistance += Vector3.Distance(startingPosition, movingPosition);
+                    if (totalDistance >= maxViewDistance) {
+                        break;
+                    }
+                    Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
+                    startingPosition = movingPosition;
                 }
-                Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
-                startingPosition = movingPosition;
             }
             else {
                 movingPosition += direction * maxRayDistance;
