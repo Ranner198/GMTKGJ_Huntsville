@@ -60,6 +60,7 @@ public class EnemyAi : MonoBehaviour {
         transform.position = new Vector3(-1000, -1000, -1000);
         dead = true;
         GameManager.instance.Kill();
+        GameManager.instance.CameraShake(0.2f);
     }
 
     public void OnDestroy() {

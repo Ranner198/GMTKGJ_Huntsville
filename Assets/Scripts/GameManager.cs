@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour {
     public int totalKills = 0;
     public bool doorOpened;
     public GameObject youDiedText;
+    public Camera maincam;
+    private float shakeAmt;
+    private Vector3 cameraOrigin;
 
     private void Awake() {
         instance = this;
@@ -79,9 +82,11 @@ public class GameManager : MonoBehaviour {
 
         //get enemies
         enemyAi = EnemyAi.instances;
+
         totalKills += currentKills;
         currentKills = 0;
         player.ResetPosition(activeLevel.spawnPoint);
+    	cameraOrigin = maincam.transform.position;
     }
     public void CompleteLevel() {
         levelsCompleted += 1;
@@ -163,6 +168,34 @@ public class GameManager : MonoBehaviour {
         foreach(EnemyAi ai in enemyAi) {
             ai.StopSearching();
         }
+        CameraShake(0.1f,0.5f);
+    }
+
+    public void CameraShake(float shakeAmount){
+    	CameraShake(shakeAmount,0.3f);
+    }
+
+    public void CameraShake(float shakeAmount, float shakeTime){
+    	shakeAmt = shakeAmount;
+    	InvokeRepeating("Shake",0,0.01f);
+    	Invoke("StopShake",shakeTime);
+    }
+
+    private void Shake(){
+    	if(shakeAmt > 0f){
+    		Vector3 camPos = maincam.transform.position;
+    		float shakeX = Random.value * shakeAmt * 2 - shakeAmt;
+    		float shakeY = Random.value * shakeAmt * 2 - shakeAmt;
+    		camPos.x += shakeX;
+    		camPos.z += shakeY;
+
+    		maincam.transform.position = camPos;
+    	}
+    }
+
+    private void StopShake(){
+    	CancelInvoke("Shake");
+    	maincam.transform.position = cameraOrigin;
     }
 }
 

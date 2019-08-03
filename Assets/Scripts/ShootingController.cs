@@ -57,5 +57,6 @@ public class ShootingController : MonoBehaviour
         Bullet.GetComponent<BulletLogic>().maxBounces = 3;
         //GameObject BulletCasing = Instantiate(bulletCasing, shootingPoint.transform.position, Random.rotation);
         //BulletCasing.GetComponent<Rigidbody>().velocity = transform.TransformPoint(new Vector3(1, 1, 0)) * Time.deltaTime * bulletSpeed/3; 
+        GameManager.instance.CameraShake(0.05f);
     }
 }
