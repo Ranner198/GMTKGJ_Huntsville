@@ -5,6 +5,16 @@ using UnityEngine.AI;
 
 public class EnemyAi : MonoBehaviour {
 
+    public static List<EnemyAi> instances = new List<EnemyAi>();
+
+    private void Awake() {
+        if (instances.Contains(this)) {
+            return;
+        }
+
+        instances.Add(this);
+    }
+
     public Transform player;
     private Vector3 playerLastPos;
     NavMeshAgent agent;
