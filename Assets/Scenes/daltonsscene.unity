@@ -514,6 +514,11 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 5336497418106090747, guid: 27598beb064697642b46b21966c7e424,
+        type: 3}
+      propertyPath: bulletSpeed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 5336497418106090689, guid: 27598beb064697642b46b21966c7e424,
         type: 3}
       propertyPath: speed
