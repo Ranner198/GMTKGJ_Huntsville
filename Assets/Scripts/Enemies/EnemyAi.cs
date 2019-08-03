@@ -17,7 +17,7 @@ public class EnemyAi : MonoBehaviour {
     }
     #endregion
 
-    public Transform player;
+    private PlayerMovement player;
     private Vector3 playerLastPos;
     private NavMeshAgent agent;
 
@@ -25,18 +25,19 @@ public class EnemyAi : MonoBehaviour {
     private Quaternion startRot;
 
     private void Start() {
+        player = PlayerMovement.playerInstance;
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = player.position;
-        playerLastPos = player.position;
+        agent.destination = player.transform.position;
+        playerLastPos = player.transform.position;
 
         startPos = transform.position;
         startRot = transform.rotation;
     }
 
     private void Update() {
-        if (player.position != playerLastPos) {
-            agent.destination = player.position;
-            playerLastPos = player.position;
+        if (player.transform.position != playerLastPos) {
+            agent.destination = player.transform.position;
+            playerLastPos = player.transform.position;
         }
     }
 
@@ -44,7 +45,7 @@ public class EnemyAi : MonoBehaviour {
         transform.position = startPos;
         transform.rotation = startRot;
         agent.enabled = true;
-        agent.destination = player.position;
+        agent.destination = player.transform.position;
     }
 
     public void Kill() {
