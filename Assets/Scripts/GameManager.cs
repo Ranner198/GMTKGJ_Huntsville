@@ -13,7 +13,6 @@ public class GameManager : MonoBehaviour
 
     private void Start(){
     	NewLevel();
-
     }
 
     private void Update(){
@@ -23,6 +22,8 @@ public class GameManager : MonoBehaviour
     	//controls checking
     	if(Input.GetKeyDown(KeyCode.R))
     		ResetLevel();
+    	if(Input.GetKeyDown(KeyCode.K))
+    		enemyAi[Random.Range(0,enemyAi.Count)].Kill();
     }
 
     public void NewLevel(){
@@ -30,6 +31,8 @@ public class GameManager : MonoBehaviour
     	if(levelList.Count > 0){
     		activeLevel = levelList[Random.Range(0,levelList.Count-1)];
     	}
+    	//get enemies
+    	enemyAi = EnemyAi.instances;
     }
     public void CompleteLevel(){
     	levelsCompleted += 1;
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
     	for(int i=0;i<enemyAi.Count;i++){
     		//reset enemies
     		enemyAi[i].Respawn();
+    		print("f");
     	}
     	levelTimeSpent = 0f;
     }
