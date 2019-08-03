@@ -9,75 +9,66 @@ public class BulletLogic : MonoBehaviour
     public int maxBounces;
     private int totalBounces = 0;
     private Collider[] overlapResults = new Collider[10];
- 
-    private void Start()
-    {
-        lm = ~lm;
-        //StartCoroutine(PredictTrajectory(100));
-    }
 
     private void Update() {
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .01f, lm))
-        {
-            if (hit.transform.tag == "Wall")
-            {
+        PredictTrajectory();
+        Debug.DrawRay(transform.position, transform.forward * 3, Color.red, Time.deltaTime, false);
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.5f, lm)) {
+            if (hit.transform.tag == "Wall") {
                 Ricochet(hit.normal);
             }
-        }       
+        }
+
+        transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
     }
 
-    void Ricochet(Vector3 normal)
-    {
+    void Ricochet(Vector3 normal) {
         totalBounces++;
-        if(totalBounces > maxBounces) {
-            print("yup");
+        if (totalBounces >= maxBounces) {
             GetComponent<Collider>().enabled = false;
             Destroy(gameObject);
             return;
         }
-        float speed = rb.velocity.magnitude;       
+        float speed = rb.velocity.magnitude;
         var dir = Vector3.Reflect(rb.velocity.normalized, normal);
-        transform.rotation = Quaternion.Euler(dir);
-        rb.velocity = dir * speed;            
+        rb.velocity = dir * speed;
     }
 
-    IEnumerator PredictTrajectory(int steps) {
+    void PredictTrajectory() {
         Vector3 movingPosition = transform.position;
         Vector3 startingPosition = movingPosition;
         Vector3 direction = transform.forward;
 
-        float maxStepDistance = 100f;
+        float maxRayDistance = 1f;
 
-        int layerMask =~ LayerMask.GetMask("Player");
+        float totalDistance = 0f;
+        float maxViewDistance = 10f;
 
-        int samples = 100;
-        int i = 0;
-        int raycastBounces = 0;
-
-        while(i < samples){
+        while(totalDistance < maxViewDistance){
             Ray ray = new Ray(movingPosition, direction);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, maxStepDistance, layerMask)) {
-                raycastBounces++;
-                if(raycastBounces > maxBounces) {
+            if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
+                if(totalBounces == maxBounces - 1) {
+                    Debug.DrawLine(startingPosition, hit.point, Color.blue, 0f, false);
                     break;
                 }
                 direction = Vector3.Reflect(direction, hit.normal);
                 movingPosition = hit.point;
-                Debug.DrawLine(startingPosition, movingPosition, Color.blue, 10f, false);
+                totalDistance += Vector3.Distance(startingPosition, movingPosition);
+                if(totalDistance >= maxViewDistance) {
+                    break;
+                }
+                Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
                 startingPosition = movingPosition;
             }
             else {
-                movingPosition += direction * maxStepDistance;
-                Debug.DrawLine(startingPosition, movingPosition, Color.blue, 10f, false);
+                movingPosition += direction * maxRayDistance;
+                totalDistance += maxRayDistance;
+                if (totalDistance >= maxViewDistance) {
+                    break;
+                }
+                Debug.DrawLine(startingPosition, movingPosition, Color.blue, 0f, false);
             }
-
-            //Gizmos.color = Color.yellow;
-            //Gizmos.DrawLine(startingPosition, position);
-
-            i++;
         }
-        yield return null;
-        //return results;
     }
 }

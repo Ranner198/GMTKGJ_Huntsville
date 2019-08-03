@@ -124,6 +124,5 @@ MonoBehaviour:
   rb: {fileID: 1196351491687428186}
   lm:
     serializedVersion: 2
-    m_Bits: 1536
-  trajectory: {fileID: 1274819297531968481, guid: 7905e63abecb24a4db241703251f7d6e,
-    type: 3}
+    m_Bits: 1024
+  maxBounces: 3
