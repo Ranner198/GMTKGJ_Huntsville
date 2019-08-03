@@ -35,6 +35,8 @@ public class ShootingController : MonoBehaviour
                 ammo--; 
             }            
         }
+        else
+            transform.rotation = transform.rotation;
     }
 
     void Shoot(Vector3 pos)
