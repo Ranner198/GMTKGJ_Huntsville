@@ -141,7 +141,7 @@ public class GameManager : MonoBehaviour
             }
             yield return null;
         }
-        Camera.main.transform.position = new Vector3(0, 10, -2);
+        //Camera.main.transform.position = new Vector3(0, 10, -2);
     	//Time.timeScale = 1f;
     }
 
@@ -156,7 +156,7 @@ public class GameManager : MonoBehaviour
     public void ResetTimeAndCamera() {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
-        Camera.main.transform.position = new Vector3(0, 10, -2);
+        //Camera.main.transform.position = new Vector3(0, 10, -2);
     }
 }
 
