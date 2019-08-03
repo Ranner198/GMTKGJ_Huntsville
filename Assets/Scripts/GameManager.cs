@@ -22,7 +22,9 @@ public class GameManager : MonoBehaviour
 
     public void NewLevel(){
     	//choose a random level
-    	activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    	if(levelList.Count > 0){
+    		activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    	}
     }
     public void CompleteLevel(){
     	levelsCompleted += 1;
