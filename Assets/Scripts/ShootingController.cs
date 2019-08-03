@@ -1,22 +1,30 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ShootingController : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject shootingPoint;
     public GameObject bulletCasing;
+    public Text shotsLeft;
     public float bulletSpeed;
     public LayerMask lm;
     public float YOffset = .5f;
     public GameObject player;
-    private int ammo = 99;
+    private int ammo = 1;
     public Camera cam;
 
     void Start()
     {
         lm = ~lm;
+        shotsLeft.text = "Shots Remaining: " + ammo;
+    }
+
+    public void ResetAmmo() {
+        ammo = 1;
+        shotsLeft.text = "Shots Remaining: " + ammo;
     }
 
     void Update()
@@ -32,7 +40,8 @@ public class ShootingController : MonoBehaviour
             if (Input.GetMouseButtonDown(0) && ammo > 0)
             {
                 Shoot(hit.point);   
-                ammo--; 
+                ammo--;
+                shotsLeft.text = "Shots Remaining: " + ammo;
             }            
         }
         else
