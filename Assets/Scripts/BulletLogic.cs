@@ -36,12 +36,21 @@ public class BulletLogic : MonoBehaviour
         totalBounces++;
         if (totalBounces >= maxBounces) {
             GetComponent<Collider>().enabled = false;
-            Destroy(gameObject);
+            StartCoroutine(DestroyBullet());
             return;
         }
         float speed = rb.velocity.magnitude;
         var dir = Vector3.Reflect(rb.velocity.normalized, normal);
         rb.velocity = dir * speed;
+    }
+
+    private IEnumerator DestroyBullet(){
+        rb.velocity = Vector3.zero;
+        gameObject.GetComponent<SphereCollider>().enabled = false;
+        gameObject.GetComponent<MeshRenderer>().enabled = false;
+        gameObject.GetComponent<TrailRenderer>().emitting = false;
+        yield return new WaitForSeconds(3f);
+        Destroy(gameObject);
     }
 
     List<Transform> enemiesInLine = new List<Transform>();
