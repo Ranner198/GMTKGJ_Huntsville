@@ -5,11 +5,14 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public LevelObject activeLevel;
+    private GameObject level;
     public List<LevelObject> levelList = new List<LevelObject>();
     public List<EnemyAi> enemyAi = new List<EnemyAi>();
     public int levelsCompleted = 0;
     public float totalTimeSpent = 0f;
     public float levelTimeSpent = 0f;
+    public int currentKills = 0;
+    public int totalKills = 0;
 
     private void Start(){
     	NewLevel();
@@ -22,8 +25,13 @@ public class GameManager : MonoBehaviour
     	//controls checking
     	if(Input.GetKeyDown(KeyCode.R))
     		ResetLevel();
-    	if(Input.GetKeyDown(KeyCode.K))
+    	if(Input.GetKeyDown(KeyCode.K)){
     		enemyAi[Random.Range(0,enemyAi.Count)].Kill();
+    		currentKills += 1;
+    	}
+    	if(Input.GetKeyDown(KeyCode.N)){
+    		CompleteLevel();
+    	}
     }
 
     public void NewLevel(){
@@ -31,13 +39,18 @@ public class GameManager : MonoBehaviour
     	if(levelsCompleted > 0){
     		//choose a random level
     		if(levelList.Count > 0){
-    			activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    			Destroy(level);
+    			activeLevel = levelList[Random.Range(0,levelList.Count)];
+    			level = Instantiate(activeLevel.levelPrefab,Vector3.zero,Quaternion.identity);
     		}
     	} else{
     		//active level should already be the start room
+    		level = activeLevel.levelPrefab;
     	}
     	//get enemies
     	enemyAi = EnemyAi.instances;
+    	totalKills += currentKills;
+    	currentKills = 0;
     }
     public void CompleteLevel(){
     	levelsCompleted += 1;
@@ -53,9 +66,9 @@ public class GameManager : MonoBehaviour
     	for(int i=0;i<enemyAi.Count;i++){
     		//reset enemies
     		enemyAi[i].Respawn();
-    		print("f");
     	}
     	levelTimeSpent = 0f;
+    	currentKills = 0;
     }
 
     private IEnumerator BulletTime(float timer){
@@ -68,4 +81,5 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class LevelObject{
 	public GameObject levelPrefab;
+	public int killsRequired;
 }
