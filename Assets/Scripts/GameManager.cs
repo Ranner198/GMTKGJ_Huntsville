@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public float levelTimeSpent = 0f;
     public int currentKills = 0;
     public int totalKills = 0;
+    public bool doorOpened;
 
     private void Awake(){
     	instance = this;
@@ -54,6 +55,9 @@ public class GameManager : MonoBehaviour
     }
 
     public void NewLevel(){
+
+        doorOpened = false;
+
     	// if not the start level
     	if(levelsCompleted > 0){
     		//choose a random level
@@ -101,6 +105,14 @@ public class GameManager : MonoBehaviour
     	Time.timeScale = 0.3f;
     	yield return new WaitForSeconds(timer);
     	Time.timeScale = 1f;
+    }
+
+    private void OpenDoor()
+    {
+        if (currentKills == activeLevel.killsRequired)
+        {
+            doorOpened = true;
+        }
     }
 }
 
