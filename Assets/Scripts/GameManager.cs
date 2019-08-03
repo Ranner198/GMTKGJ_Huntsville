@@ -27,9 +27,14 @@ public class GameManager : MonoBehaviour
     }
 
     public void NewLevel(){
-    	//choose a random level
-    	if(levelList.Count > 0){
-    		activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    	// if not the start level
+    	if(levelsCompleted > 0){
+    		//choose a random level
+    		if(levelList.Count > 0){
+    			activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    		}
+    	} else{
+    		//active level should already be the start room
     	}
     	//get enemies
     	enemyAi = EnemyAi.instances;
