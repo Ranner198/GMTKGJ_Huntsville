@@ -57,7 +57,9 @@ public class BulletLogic : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
                 if (hit.transform.gameObject.layer == LayerMask.NameToLayer("Enemy")) {
-                    Camera.main.transform.position = (transform.position + hit.point) / 2;
+                    if(GameManager.instance.currentKills >= GameManager.instance.enemyAi.Count - 1) {
+                        Camera.main.transform.position = (transform.position + hit.point) / 2 + new Vector3(0, 5, -5);
+                    }
                     movingPosition += direction * maxRayDistance;
                     totalDistance += maxRayDistance;
                     if (totalDistance >= maxViewDistance) {
