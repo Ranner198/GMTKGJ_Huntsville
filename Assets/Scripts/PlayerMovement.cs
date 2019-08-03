@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
 
     public static PlayerMovement playerInstance;
     public float speed;
+    public bool dead;
 
     private Vector3 movement;
 
