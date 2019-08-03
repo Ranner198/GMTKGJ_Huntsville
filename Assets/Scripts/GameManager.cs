@@ -46,6 +46,7 @@ public class GameManager : MonoBehaviour
     		//reset enemies
     		enemyAi[i].Respawn();
     	}
+    	levelTimeSpent = 0f;
     }
 
     private IEnumerator BulletTime(float timer){
