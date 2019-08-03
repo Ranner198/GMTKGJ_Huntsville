@@ -23,8 +23,6 @@ public class PlayerMovement : MonoBehaviour
         {
             playerInstance = this;
         }
-
-        movement.y = transform.position.y;
     }
 
     void Start()
@@ -35,10 +33,17 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        movement = transform.position;
         movement += new Vector3((float)Input.GetAxis("Horizontal"), 0.0f, (float)Input.GetAxis("Vertical")) * speed * Time.deltaTime;
 
         rb.MovePosition(movement);
         //rb.velocity = movement * Time.deltaTime;
 
+    }
+
+    public void ResetPosition(Vector2 newPos){
+        Vector3 truePos = new Vector3(newPos.x,transform.position.y,newPos.y);
+        movement = truePos;
+        transform.position = movement;
     }
 }

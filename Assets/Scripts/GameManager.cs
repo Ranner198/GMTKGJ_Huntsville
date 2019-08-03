@@ -5,16 +5,28 @@ using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
+	//singleton
+	public static GameManager instance;
+
+
     public LevelObject activeLevel;
     private GameObject level;
     public List<LevelObject> levelList = new List<LevelObject>();
     public List<EnemyAi> enemyAi = new List<EnemyAi>();
+    public PlayerMovement player; 
     public int levelsCompleted = 0;
     public float totalTimeSpent = 0f;
     public float levelTimeSpent = 0f;
     public int currentKills = 0;
     public int totalKills = 0;
+
+    private void Awake(){
+    	instance = this;
+    }
+
+
     private void Start(){
+    	player = PlayerMovement.playerInstance;
     	NewLevel();
     }
 
@@ -58,6 +70,7 @@ public class GameManager : MonoBehaviour
     	enemyAi = EnemyAi.instances;
     	totalKills += currentKills;
     	currentKills = 0;
+    	player.ResetPosition(activeLevel.spawnPoint);
     }
     public void CompleteLevel(){
     	levelsCompleted += 1;
@@ -81,6 +94,7 @@ public class GameManager : MonoBehaviour
     	}
     	levelTimeSpent = 0f;
     	currentKills = 0;
+
     }
 
     private IEnumerator BulletTime(float timer){
@@ -94,4 +108,5 @@ public class GameManager : MonoBehaviour
 public class LevelObject{
 	public GameObject levelPrefab;
 	public int killsRequired;
+	public Vector2 spawnPoint;
 }
