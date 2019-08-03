@@ -36,7 +36,7 @@ public class EnemyAi : MonoBehaviour {
     }
 
     private void Update() {
-        if (dead) {
+        if (dead || !agent.enabled) {
             return;
         }
         if (player.transform.position != playerLastPos) {
@@ -60,11 +60,16 @@ public class EnemyAi : MonoBehaviour {
         transform.position = new Vector3(-1000, -1000, -1000);
         dead = true;
         GameManager.instance.Kill();
+        GameManager.instance.CameraShake(0.2f);
     }
 
     public void OnDestroy() {
         if (instances.Contains(this)) {
             instances.Remove(this);
         }
+    }
+
+    public void StopSearching() {
+        agent.enabled = false;
     }
 }

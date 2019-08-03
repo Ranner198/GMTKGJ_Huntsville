@@ -15,4 +15,5 @@ public class Player : MonoBehaviour
 
         rb.velocity = movement * Time.deltaTime * speed;
     }
+
 }

@@ -4,5 +4,14 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/a83a919ddecaaba45b5438920eb760a0
+    guid: a83a919ddecaaba45b5438920eb760a0
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6a33d380f6121f247b1bc353a03b453d
+  - enabled: 1
+    path: Assets/Scenes/daltonsscene.unity
+    guid: 003491c14f6592e4c8625faa5ef5afbd
   m_configObjects: {}
