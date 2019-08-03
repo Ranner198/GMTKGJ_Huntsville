@@ -21,6 +21,8 @@ public class MainMenuButtonScript : MonoBehaviour {
     //Array to store resolutions
     Resolution[] resolutions;
 
+    public string firstScene;
+
     public void Start()
     {
         //Get the audio source componet
@@ -30,14 +32,15 @@ public class MainMenuButtonScript : MonoBehaviour {
         resolutions = Screen.resolutions;
 
         //Clear the drop down list
-        resolutionDropDown.ClearOptions();
+        if (resolutionDropDown != null)
+            resolutionDropDown.ClearOptions();
 
         //String list of all the avaliable resoultions on the PC
         List<string> avaliableResolutions = new List<string>();
 
         //index for current size
         int currentIndex = -1;
-
+    
         for (int i = 0; i < resolutions.Length; i++)
         {
             //Add in the new options
@@ -58,7 +61,7 @@ public class MainMenuButtonScript : MonoBehaviour {
 
     //Play Button Function
     public void Play() {
-        SceneManager.LoadScene("GameScene");
+        SceneManager.LoadScene(firstScene);
     }
 
     //"Back Button" function

@@ -50,10 +50,15 @@ public class FillAmount : MonoBehaviour
             panels[index].panel.SetActive(true);  
             if (panels[index].images[i].fillAmount < .9f)
             {
+                try {
+                    panels[index].images[i].GetComponent<Button>().interactable = true;
+                }
+                catch(SystemException e) {
+                    Debug.Log(e);
+                }   
                 StartCoroutine(IFillAmount(true, panels[index].images[i], threadSafe => {
                     if (threadSafe)
-                    {     
-
+                    {                   
                     }
                 }));
             }
