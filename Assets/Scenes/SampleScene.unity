@@ -524,6 +524,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 2686075521606120834, guid: a40c00958f289ec4fb9859afbbe9874d, type: 3}
   shootingPoint: {fileID: 1245213627}
+  bulletCasing: {fileID: 0}
+  shotsLeft: {fileID: 0}
   bulletSpeed: 100
   lm:
     serializedVersion: 2
