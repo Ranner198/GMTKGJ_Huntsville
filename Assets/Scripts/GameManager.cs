@@ -22,7 +22,9 @@ public class GameManager : MonoBehaviour
 
     public void NewLevel(){
     	//choose a random level
-    	activeLevel = levelList[random.range(0,levelList.count-1)];
+    	if(levelList.Count > 0){
+    		activeLevel = levelList[Random.Range(0,levelList.Count-1)];
+    	}
     }
     public void CompleteLevel(){
     	levelsCompleted += 1;
@@ -35,9 +37,9 @@ public class GameManager : MonoBehaviour
     }
 
     private IEnumerator BulletTime(float timer){
-    	Time.timescale = 0.3f;
+    	Time.timeScale = 0.3f;
     	yield return new WaitForSeconds(timer);
-    	Time.timescale = 1f;
+    	Time.timeScale = 1f;
     }
 }
 
