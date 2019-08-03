@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: a83a919ddecaaba45b5438920eb760a0
+  - enabled: 1
+    path: Assets/Scenes/daltonsscene.unity
+    guid: 003491c14f6592e4c8625faa5ef5afbd
   m_configObjects: {}
