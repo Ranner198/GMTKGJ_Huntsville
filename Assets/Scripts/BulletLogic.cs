@@ -22,6 +22,12 @@ public class BulletLogic : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(rb.velocity, Vector3.up);
     }
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.GetComponent<EnemyAi>()) {
+            other.GetComponent<EnemyAi>().Kill();
+        }
+    }
+
     void Ricochet(Vector3 normal) {
         totalBounces++;
         if (totalBounces >= maxBounces) {
@@ -39,6 +45,8 @@ public class BulletLogic : MonoBehaviour
         Vector3 startingPosition = movingPosition;
         Vector3 direction = transform.forward;
 
+        LayerMask wall = LayerMask.GetMask("Wall");
+
         float maxRayDistance = 1f;
 
         float totalDistance = 0f;
@@ -47,7 +55,7 @@ public class BulletLogic : MonoBehaviour
         while(totalDistance < maxViewDistance){
             Ray ray = new Ray(movingPosition, direction);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
+            if (Physics.Raycast(ray, out hit, maxRayDistance, wall)) {
                 if(totalBounces == maxBounces - 1) {
                     Debug.DrawLine(startingPosition, hit.point, Color.blue, 0f, false);
                     break;
