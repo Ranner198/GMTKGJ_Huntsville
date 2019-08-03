@@ -24,4 +24,12 @@ public class ExitDoor : MonoBehaviour{
             particles.SetActive(false);
         }
     }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            GameManager.instance.CompleteLevel();
+        }
+    }
 }
