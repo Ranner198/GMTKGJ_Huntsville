@@ -7,7 +7,6 @@ public class EnemyAi : MonoBehaviour {
 
     #region Multiton
     public static List<EnemyAi> instances = new List<EnemyAi>();
-
     private void Awake() {
         if (instances.Contains(this)) {
             return;
@@ -20,10 +19,8 @@ public class EnemyAi : MonoBehaviour {
     private PlayerMovement player;
     private Vector3 playerLastPos;
     private NavMeshAgent agent;
-
     private Vector3 startPos;
-    private Quaternion startRot;
-
+    private Quaternion startRot;    
     private void Start() {
         player = PlayerMovement.playerInstance;
         agent = GetComponent<NavMeshAgent>();
@@ -50,7 +47,8 @@ public class EnemyAi : MonoBehaviour {
 
     public void Kill() {
         agent.enabled = false;
-        transform.position = new Vector3(-1000, -1000, -1000);
+        transform.position = new Vector3(-1000, -1000, -1000);        
+        GameManager.Kill();
     }
 
     public void OnDestroy() {

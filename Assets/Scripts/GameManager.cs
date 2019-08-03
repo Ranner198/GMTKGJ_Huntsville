@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,12 +14,18 @@ public class GameManager : MonoBehaviour
     public float levelTimeSpent = 0f;
     public int currentKills = 0;
     public int totalKills = 0;
-
     private void Start(){
     	NewLevel();
     }
 
+	public static void Kill()
+	{
+		//Bruh
+		print("Boom Head shot!");
+	}
+
     private void Update(){
+		
     	levelTimeSpent += Time.deltaTime;
     	totalTimeSpent += Time.deltaTime;
 
@@ -61,6 +68,11 @@ public class GameManager : MonoBehaviour
     public void StartBulletTime(){
     	StartCoroutine(BulletTime(0.75f));
     }
+
+	public void KilledEnemy()
+	{
+		Debug.Log("BOOM HEADSHOT");
+	}
 
     private void ResetLevel(){
     	for(int i=0;i<enemyAi.Count;i++){
