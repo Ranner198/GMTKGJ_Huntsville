@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
     public static PlayerMovement playerInstance;
     public float speed;
     public bool dead;
+    public Rigidbody rb;
 
     private Vector3 movement;
 
@@ -22,6 +23,8 @@ public class PlayerMovement : MonoBehaviour
         {
             playerInstance = this;
         }
+
+        movement.y = transform.position.y;
     }
 
     void Start()
@@ -32,9 +35,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        movement += new Vector3((float)Input.GetAxis("Horizontal"), 0.0f, (float)Input.GetAxis("Vertical")) * speed;
+        movement += new Vector3((float)Input.GetAxis("Horizontal"), 0.0f, (float)Input.GetAxis("Vertical")) * speed * Time.deltaTime;
 
-        playerInstance.transform.position = movement;
+        rb.MovePosition(movement);
+        //rb.velocity = movement * Time.deltaTime;
 
     }
 }
