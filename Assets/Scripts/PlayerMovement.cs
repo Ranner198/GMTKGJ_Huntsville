@@ -49,4 +49,11 @@ public class PlayerMovement : MonoBehaviour
         movement = truePos;
         transform.position = movement;
     }
+
+    private void OnCollisionEnter(Collision collision) {
+        print("ope");
+        if (collision.gameObject.tag == "Enemy") {
+            GameManager.instance.PlayerKilled();
+        }
+    }
 }

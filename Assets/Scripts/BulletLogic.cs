@@ -4,6 +4,18 @@ using UnityEngine;
 
 public class BulletLogic : MonoBehaviour
 {
+    public static BulletLogic instance;
+
+    private void Awake() {
+        if(instance != null && instance != this) {
+            Debug.LogError("Ya fucked up A-A-Ron");
+            DestroyImmediate(gameObject);
+        }
+        else {
+            instance = this;
+        }
+    }
+
     public Rigidbody rb;
     public LayerMask lm;
     public int maxBounces;

@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour {
     public int currentKills = 0;
     public int totalKills = 0;
     public bool doorOpened;
+    public GameObject youDiedText;
 
     private void Awake() {
         instance = this;
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour {
     private void Start() {
         player = PlayerMovement.playerInstance;
         NewLevel();
+        youDiedText.SetActive(false);
     }
 
     public void Kill() {
@@ -99,6 +101,10 @@ public class GameManager : MonoBehaviour {
         levelTimeSpent = 0f;
         currentKills = 0;
         player.ResetPosition(activeLevel.spawnPoint);
+        player.GetComponent<ShootingController>().ResetAmmo();
+        if(BulletLogic.instance != null)
+            Destroy(BulletLogic.instance.gameObject);
+        youDiedText.SetActive(false);
     }
 
     public bool OnLastKill() {
@@ -149,6 +155,14 @@ public class GameManager : MonoBehaviour {
         Time.timeScale = 1f;
         Time.fixedDeltaTime = 0.02f * Time.timeScale;
         //Camera.main.transform.position = new Vector3(0, 10, -2);
+    }
+
+    public void PlayerKilled() {
+        player.transform.position = new Vector3(1000, player.transform.position.y, 1000);
+        youDiedText.SetActive(true);
+        foreach(EnemyAi ai in enemyAi) {
+            ai.StopSearching();
+        }
     }
 }
 
