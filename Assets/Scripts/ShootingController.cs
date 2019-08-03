@@ -6,6 +6,7 @@ public class ShootingController : MonoBehaviour
 {
     public GameObject bullet;
     public GameObject shootingPoint;
+    public GameObject bulletCasing;
     public float bulletSpeed;
     public LayerMask lm;
     public float YOffset = .5f;
@@ -42,5 +43,7 @@ public class ShootingController : MonoBehaviour
         GameObject Bullet = Instantiate(bullet, shootingPoint.transform.position, transform.rotation);
         Bullet.name = "Bullet";
         Bullet.GetComponent<Rigidbody>().velocity = bulletSpeed * Time.deltaTime * transform.forward;
+        GameObject BulletCasing = Instantiate(bulletCasing, shootingPoint.transform.position, Random.rotation);
+        BulletCasing.GetComponent<Rigidbody>().velocity = transform.TransformPoint(new Vector3(1, 1, 0)) * Time.deltaTime * bulletSpeed/3; 
     }
 }
