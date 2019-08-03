@@ -5,15 +5,29 @@ using UnityEngine;
 public class BulletLogic : MonoBehaviour
 {
     public Rigidbody rb;
-    void OnCollisionEnter(Collision coll)
-    {        
-        float speed = rb.velocity.magnitude;
-        if (coll.gameObject.tag == "Wall")
-        {            
-            var dir = Vector3.Reflect(rb.velocity.normalized, coll.contacts[0].normal);
-            rb.velocity = dir * speed * 2;            
-            transform.rotation = Quaternion.Euler(rb.velocity);
-            rb.angularVelocity = Vector3.zero;
-        }
+    public LayerMask lm;
+    private Collider[] overlapResults = new Collider[10];
+ 
+    private void Start()
+    {
+        lm = ~lm;
+    }
+
+    private void Update() {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, .2f, lm))
+        {
+            if (hit.transform.tag == "Wall")
+            {
+                Ricochet(hit.normal);
+            }
+        }       
+    }
+
+    void Ricochet(Vector3 normal)
+    {
+        float speed = rb.velocity.magnitude;       
+        var dir = Vector3.Reflect(rb.velocity.normalized, normal);
+        transform.rotation = Quaternion.Euler(dir);
+        rb.velocity = dir * speed;            
     }
 }

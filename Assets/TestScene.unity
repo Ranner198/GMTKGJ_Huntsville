@@ -523,14 +523,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f29c8fe6aa1df640ab21bb27d2e996a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bullet: {fileID: 2686075521606120834, guid: a40c00958f289ec4fb9859afbbe9874d, type: 3}
+  bullet: {fileID: 5567107686480277646, guid: 3839c40577501f946b3fa95b24ac4213, type: 3}
   shootingPoint: {fileID: 1245213627}
   bulletCasing: {fileID: 4584990788586679598, guid: 7533481da12f2ef4ba97ce7b784ff1f0,
     type: 3}
   bulletSpeed: 100
   lm:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   YOffset: 0.5
   player: {fileID: 1000530462}
   cam: {fileID: 963194227}
