@@ -19,5 +19,9 @@ public class ExitDoor : MonoBehaviour{
         {
             particles.SetActive(true);
         }
+        else
+        {
+            particles.SetActive(false);
+        }
     }
 }
