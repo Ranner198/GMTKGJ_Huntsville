@@ -20,7 +20,9 @@ public class EnemyAi : MonoBehaviour {
     private Vector3 playerLastPos;
     private NavMeshAgent agent;
     private Vector3 startPos;
-    private Quaternion startRot;    
+    private Quaternion startRot;
+    private bool dead = false;
+
     private void Start() {
         player = PlayerMovement.playerInstance;
         agent = GetComponent<NavMeshAgent>();
@@ -32,6 +34,9 @@ public class EnemyAi : MonoBehaviour {
     }
 
     private void Update() {
+        if (dead) {
+            return;
+        }
         if (player.transform.position != playerLastPos) {
             agent.destination = player.transform.position;
             playerLastPos = player.transform.position;
@@ -43,11 +48,13 @@ public class EnemyAi : MonoBehaviour {
         transform.rotation = startRot;
         agent.enabled = true;
         agent.destination = player.transform.position;
+        dead = false;
     }
 
     public void Kill() {
         agent.enabled = false;
-        transform.position = new Vector3(-1000, -1000, -1000);        
+        transform.position = new Vector3(-1000, -1000, -1000);
+        dead = true;
         GameManager.Kill();
     }
 
