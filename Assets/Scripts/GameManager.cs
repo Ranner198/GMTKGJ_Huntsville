@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public LevelObject activeLevel;
     public List<LevelObject> levelList = new List<LevelObject>();
+    public List<EnemyAi> enemyAi = new List<EnemyAi>();
     public int levelsCompleted = 0;
     public float totalTimeSpent = 0f;
     public float levelTimeSpent = 0f;
@@ -18,6 +19,10 @@ public class GameManager : MonoBehaviour
     private void Update(){
     	levelTimeSpent += Time.deltaTime;
     	totalTimeSpent += Time.deltaTime;
+
+    	//controls checking
+    	if(Input.GetKeyDown(KeyCode.R))
+    		ResetLevel();
     }
 
     public void NewLevel(){
@@ -34,6 +39,13 @@ public class GameManager : MonoBehaviour
 
     public void StartBulletTime(){
     	StartCoroutine(BulletTime(0.75f));
+    }
+
+    private void ResetLevel(){
+    	for(int i=0;i<enemyAi.Count;i++){
+    		//reset enemies
+    		enemyAi[i].Respawn();
+    	}
     }
 
     private IEnumerator BulletTime(float timer){
