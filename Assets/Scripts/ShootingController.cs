@@ -23,6 +23,8 @@ public class ShootingController : MonoBehaviour
     }
 
     public void ResetAmmo() {
+        if(BulletLogic.instance)
+            Destroy(BulletLogic.instance);
         ammo = 1;
         shotsLeft.text = "Shots Remaining: " + ammo;
     }

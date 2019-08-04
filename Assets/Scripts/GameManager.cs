@@ -61,18 +61,8 @@ public class GameManager : MonoBehaviour {
 
         doorOpened = false;
 
-        /*// if not the start level
+        //if not the start level
     	if(levelsCompleted > 0){
-    		//choose a random level
-    		if(levelList.Count > 0){
-    			Destroy(level);
-    			activeLevel = levelList[Random.Range(0,levelList.Count)];
-    			level = Instantiate(activeLevel.levelPrefab,Vector3.zero,Quaternion.identity);
-    		}
-    	} else{
-    		//active level should already be the start room
-    		level = activeLevel.levelPrefab;
-    	}*/
 
         if (level != null)
             Destroy(level);
@@ -86,6 +76,10 @@ public class GameManager : MonoBehaviour {
         totalKills += currentKills;
         currentKills = 0;
         player.ResetPosition(activeLevel.spawnPoint);
+        player.GetComponent<ShootingController>().ResetAmmo();
+    	} else{
+    		level = activeLevel.levelPrefab;
+    	}
     	cameraOrigin = maincam.transform.position;
     }
     public void CompleteLevel() {
