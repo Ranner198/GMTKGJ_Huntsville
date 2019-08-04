@@ -6303,7 +6303,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a992e31bf473774f838300bbeadf2af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mouseOver: {fileID: 8300000, guid: 8ca116a7c0157d24f88050c2b9d680e4, type: 3}
+  mouseOver: {fileID: 8300000, guid: 4a4e8a7cffa073d4796cc67cc87aeccc, type: 3}
   onClicked: {fileID: 8300000, guid: 95e13e3bb489a1249bbcb4aa77b75cbd, type: 3}
   mixer: {fileID: 0}
   resolutionDropDown: {fileID: 0}
