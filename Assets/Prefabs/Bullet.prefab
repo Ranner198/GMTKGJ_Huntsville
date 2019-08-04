@@ -129,6 +129,7 @@ MonoBehaviour:
     m_Bits: 5120
   maxBounces: 6
   ricochetSound: {fileID: 8300000, guid: 95e13e3bb489a1249bbcb4aa77b75cbd, type: 3}
+  fizzleOutSound: {fileID: 8300000, guid: 9a7d3bf1b6b730f43a3dd3befcaa4acc, type: 3}
   aud: {fileID: -4697743577228129992}
 --- !u!96 &5282162613835341053
 TrailRenderer:
