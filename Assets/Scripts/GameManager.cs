@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     //singleton
@@ -75,11 +76,12 @@ public class GameManager : MonoBehaviour {
         //controls checking
         if (Input.GetKeyDown(KeyCode.R))
             ResetLevel();
-        if (Input.GetKeyDown(KeyCode.K)) {
-            //enemyAi[Random.Range(0, enemyAi.Count)].Kill(0);
-        }
-        if (Input.GetKeyDown(KeyCode.N)) {
-            //CompleteLevel();
+
+        if(finished){
+        	if(Input.GetKeyDown(KeyCode.N)){
+        		//new game
+        		SceneManager.LoadScene("MainMenu");
+        	}
         }
     }
 
