@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 943190898}
   - component: {fileID: 943190897}
   m_Layer: 8
-  m_Name: Cube
+  m_Name: Exit
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -837,12 +837,16 @@ MonoBehaviour:
   levelList:
   - levelPrefab: {fileID: 6197004570337242907, guid: 15e68a5c236bc3a4888e12814aeb7fe2,
       type: 3}
-    killsRequired: 3
+    killsRequired: 1
     spawnPoint: {x: -5, y: 0}
   - levelPrefab: {fileID: 8799098995932522745, guid: dcd20477193a5cd47bf8a326ac684321,
       type: 3}
-    killsRequired: 2
+    killsRequired: 3
     spawnPoint: {x: 0, y: 0}
+  - levelPrefab: {fileID: 2487195483714220656, guid: 78c76a71b0620284c9fc503ed51ca192,
+      type: 3}
+    killsRequired: 3
+    spawnPoint: {x: 0, y: 3}
   enemyAi: []
   player: {fileID: 0}
   levelsCompleted: 0
