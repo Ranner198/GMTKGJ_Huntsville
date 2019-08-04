@@ -16,6 +16,8 @@ public class ShootingController : MonoBehaviour
     private int ammo = 1;
     public Camera cam;
 
+    private float timeTakenBeforeShot = 0;
+
     void Start()
     {
         lm = ~lm;
@@ -27,11 +29,12 @@ public class ShootingController : MonoBehaviour
             Destroy(BulletLogic.instance.gameObject);
         ammo = 1;
         shotsLeft.text = "Shots Remaining: " + ammo;
+        timeTakenBeforeShot = 0;
     }
 
     void Update()
     {
-           
+        timeTakenBeforeShot += Time.deltaTime;           
         var ray = cam.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit))
@@ -59,5 +62,6 @@ public class ShootingController : MonoBehaviour
         //GameObject BulletCasing = Instantiate(bulletCasing, shootingPoint.transform.position, Random.rotation);
         //BulletCasing.GetComponent<Rigidbody>().velocity = transform.TransformPoint(new Vector3(1, 1, 0)) * Time.deltaTime * bulletSpeed/3; 
         GameManager.instance.CameraShake(0.05f);
+        GameManager.instance.GetTimePlayerShot(timeTakenBeforeShot);
     }
 }

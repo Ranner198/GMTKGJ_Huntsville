@@ -23,9 +23,13 @@ public class GameManager : MonoBehaviour {
     public bool doorOpened;
     public GameObject youDiedText;
     public Text enemiesRemainingText;
+    public Text scoreText;
     public Camera maincam;
     private float shakeAmt;
     private Vector3 cameraOrigin;
+    private int totalScore = 0;
+    private int levelScore = 0;
+    private float timeMultiplier;
 
     private void Awake() {
         instance = this;
@@ -38,9 +42,19 @@ public class GameManager : MonoBehaviour {
         youDiedText.SetActive(false);
     }
 
-    public void Kill() {
+    public void GetTimePlayerShot(float _time) {
+        timeMultiplier = Mathf.Max(10f - _time, 1);
+    }
+
+    public void Kill(float _distance) {
         currentKills++;
         UpdateKillsRemaining();
+        Score(_distance);
+    }
+
+    private void Score(float _distance) {
+        levelScore += (int)(10 * _distance * timeMultiplier);
+        scoreText.text = "Score: " + (totalScore + levelScore);
     }
 
     private void Update() {
@@ -52,7 +66,7 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
             ResetLevel();
         if (Input.GetKeyDown(KeyCode.K)) {
-            enemyAi[Random.Range(0, enemyAi.Count)].Kill();
+            enemyAi[Random.Range(0, enemyAi.Count)].Kill(0);
         }
         if (Input.GetKeyDown(KeyCode.N)) {
             CompleteLevel();
@@ -62,7 +76,7 @@ public class GameManager : MonoBehaviour {
     int currentLevelIndex = 0;
 
     public void NewLevel() {
-
+        levelScore = 0;
         doorOpened = false;
 
         if (levelsCompleted > 0) {
@@ -108,6 +122,7 @@ public class GameManager : MonoBehaviour {
     public void CompleteLevel() {
         levelsCompleted += 1;
         levelTimeSpent = 0f;
+        totalScore += levelScore;
         NewLevel();
     }
 
@@ -129,6 +144,8 @@ public class GameManager : MonoBehaviour {
         youDiedText.SetActive(false);
         UpdateKillsRemaining();
         doorOpened = false;
+        levelScore = 0;
+        scoreText.text = "Score :" + totalScore;
     }
 
     public bool OnLastKill() {

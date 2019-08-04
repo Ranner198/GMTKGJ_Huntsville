@@ -26,8 +26,11 @@ public class BulletLogic : MonoBehaviour {
     public AudioSource aud;
 
     private bool dead = false;
+    private float distanceTraveledBeforeKill = 0;
+    private Vector3 previousPosition;
 
     private void Update() {
+        distanceTraveledBeforeKill += Vector3.Distance(transform.position, previousPosition);
         PredictTrajectory();
         Debug.DrawRay(transform.position, transform.forward * 3, Color.red, Time.deltaTime, false);
         if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.5f, lm)) {
@@ -45,7 +48,7 @@ public class BulletLogic : MonoBehaviour {
                 Time.timeScale = 1f;
                 Time.fixedDeltaTime = 0.02f * Time.timeScale;
             }*/
-            other.GetComponent<EnemyAi>().Kill();
+            other.GetComponent<EnemyAi>().Kill(distanceTraveledBeforeKill);
         }
     }
 

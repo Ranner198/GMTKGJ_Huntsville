@@ -53,13 +53,13 @@ public class EnemyAi : MonoBehaviour {
         dead = false;
     }
 
-    public void Kill() {
+    public void Kill(float _distance) {
         Instantiate(deathExplosionPrefab, transform.position, Quaternion.identity);
 
         agent.enabled = false;
         transform.position = new Vector3(-1000, -1000, -1000);
         dead = true;
-        GameManager.instance.Kill();
+        GameManager.instance.Kill(_distance);
         GameManager.instance.CameraShake(0.2f);
     }
 
