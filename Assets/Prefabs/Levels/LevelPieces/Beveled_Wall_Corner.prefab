@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 8456897541800619932}
   - component: {fileID: 2765323329436750693}
   - component: {fileID: 4786210922237624593}
+  - component: {fileID: 2845439941097688530}
+  - component: {fileID: 2764287771892688307}
   m_Layer: 10
   m_Name: Beveled_Wall_Corner
   m_TagString: Wall
@@ -95,3 +97,29 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 8992484233014571971, guid: 986396273adc8be418e275324c3784df, type: 3}
+--- !u!65 &2845439941097688530
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493661030127216569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 4, y: 3, z: 1.0238094}
+  m_Center: {x: -2, y: 1.5, z: -0.48809502}
+--- !u!65 &2764287771892688307
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4493661030127216569}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9719, y: 3, z: 4}
+  m_Center: {x: -3.51405, y: 1.5, z: 1}
