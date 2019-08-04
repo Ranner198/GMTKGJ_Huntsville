@@ -30,7 +30,9 @@ public class GameManager : MonoBehaviour {
     private int totalScore = 0;
     private int levelScore = 0;
     private float timeMultiplier;
-
+    public int numOfDeaths;
+    public Text DeathText;
+    public Text totalTimeText;
     private void Awake() {
         instance = this;
         cameraOrigin = maincam.transform.position;
@@ -62,6 +64,8 @@ public class GameManager : MonoBehaviour {
 
         levelTimeSpent += Time.deltaTime;
         totalTimeSpent += Time.deltaTime;
+
+        totalTimeText.text = "Total Time: " + totalTimeSpent;
 
         //controls checking
         if (Input.GetKeyDown(KeyCode.R))
@@ -102,6 +106,8 @@ public class GameManager : MonoBehaviour {
                 activeLevel = winnerLevel;
                 activeLevel.levelPrefab.SetActive(true);
                 level = activeLevel.levelPrefab;
+                DeathText.text = "Deaths: " + numOfDeaths.ToString();
+                DeathText.gameObject.SetActive(true);
             }
             player.ResetPosition(activeLevel.spawnPoint);
             player.GetComponent<ShootingController>().ResetAmmo();
@@ -149,6 +155,7 @@ public class GameManager : MonoBehaviour {
         }
         levelScore = 0;
         scoreText.text = "Score :" + totalScore;
+        numOfDeaths++;
     }
 
     public bool OnLastKill() {
