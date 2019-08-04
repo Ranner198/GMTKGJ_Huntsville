@@ -3,7 +3,27 @@ guid: 986396273adc8be418e275324c3784df
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Emissive_Mat
+    second: {fileID: 2100000, guid: eb44b20d4a833ed4ea814c062a44bdd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_Mat
+    second: {fileID: 2100000, guid: 1b82c1c2d161ab64cb92e0eb00ed0b73, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_Secondary_Mat
+    second: {fileID: 2100000, guid: df2d7c0d77d9b414e91fa8ad7923bb23, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wall_Trim_Mat
+    second: {fileID: 2100000, guid: df2d7c0d77d9b414e91fa8ad7923bb23, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

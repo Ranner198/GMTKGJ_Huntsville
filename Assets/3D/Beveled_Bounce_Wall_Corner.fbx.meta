@@ -3,7 +3,12 @@ guid: 8cf3fe43cf784a34d8eeb56b8172842b
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Beveled_Bounce_Wall_Mat
+    second: {fileID: 2100000, guid: 1b82c1c2d161ab64cb92e0eb00ed0b73, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

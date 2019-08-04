@@ -3,7 +3,12 @@ guid: a86500f136f130e43b62c0f779a5043e
 ModelImporter:
   serializedVersion: 25
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Bounce_Corner_Wall1
+    second: {fileID: 2100000, guid: 1b82c1c2d161ab64cb92e0eb00ed0b73, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
