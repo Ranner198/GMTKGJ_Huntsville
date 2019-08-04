@@ -128,6 +128,7 @@ public class GameManager : MonoBehaviour {
             Destroy(BulletLogic.instance.gameObject);
         youDiedText.SetActive(false);
         UpdateKillsRemaining();
+        doorOpened = false;
     }
 
     public bool OnLastKill() {

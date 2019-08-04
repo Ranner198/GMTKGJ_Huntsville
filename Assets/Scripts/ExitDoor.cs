@@ -5,13 +5,14 @@ using UnityEngine;
 public class ExitDoor : MonoBehaviour{
 
     public GameObject particles;
+    public GameObject portal;
     private bool open = false;
 
     // Start is called before the first frame update
     void Start()
     {
         particles.SetActive(false);
-
+        portal.SetActive(false);
     }
 
     // Update is called once per frame
@@ -20,11 +21,13 @@ public class ExitDoor : MonoBehaviour{
         if(GameManager.instance.doorOpened)
         {
             particles.SetActive(true);
+            portal.SetActive(true);
             open = true;
         }
         else
         {
             particles.SetActive(false);
+            portal.SetActive(false);
             open = false;
         }
     }
