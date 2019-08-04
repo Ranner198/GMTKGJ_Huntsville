@@ -13751,6 +13751,10 @@ MonoBehaviour:
       type: 3}
     killsRequired: 3
     spawnPoint: {x: 0, y: 3}
+  - levelPrefab: {fileID: 7510391419318012063, guid: a8339d9f65df4db40b72e0737361b35d,
+      type: 3}
+    killsRequired: 2
+    spawnPoint: {x: 0, y: 0}
   enemyAi: []
   player: {fileID: 0}
   levelsCompleted: 0
