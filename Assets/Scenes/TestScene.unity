@@ -153,6 +153,10 @@ MonoBehaviour:
     levelPrefab: {fileID: 0}
     killsRequired: 0
     spawnPoint: {x: 0, y: 0}
+  winnerLevel:
+    levelPrefab: {fileID: 0}
+    killsRequired: 0
+    spawnPoint: {x: 0, y: 0}
   levelList: []
   enemyAi: []
   player: {fileID: 1000530463}
@@ -163,6 +167,7 @@ MonoBehaviour:
   totalKills: 0
   doorOpened: 0
   youDiedText: {fileID: 0}
+  enemiesRemainingText: {fileID: 0}
   maincam: {fileID: 0}
 --- !u!4 &615537161
 Transform:
