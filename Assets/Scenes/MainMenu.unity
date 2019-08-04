@@ -177,7 +177,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Some Logo Here
+  m_text: HAWKEYE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0da2c0dc88b6b3241887df60b9552a5e, type: 2}
   m_sharedMaterial: {fileID: 8936921754378534410, guid: 0da2c0dc88b6b3241887df60b9552a5e,
@@ -247,12 +247,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 25072962}
-    characterCount: 14
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
@@ -8636,7 +8636,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: Some Logo Here
+  m_text: HAWKEYE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ab1f19c424720c42a9ce4f3094ff740, type: 2}
   m_sharedMaterial: {fileID: 8936921754378534410, guid: 5ab1f19c424720c42a9ce4f3094ff740,
@@ -8706,12 +8706,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1870949873}
-    characterCount: 14
+    characterCount: 7
     spriteCount: 0
-    spaceCount: 2
-    wordCount: 3
+    spaceCount: 0
+    wordCount: 1
     linkCount: 0
-    lineCount: 2
+    lineCount: 1
     pageCount: 1
     materialCount: 1
   m_isUsingLegacyAnimationComponent: 0
