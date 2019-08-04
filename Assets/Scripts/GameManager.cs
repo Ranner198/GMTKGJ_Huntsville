@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour {
     //singleton
@@ -20,6 +21,7 @@ public class GameManager : MonoBehaviour {
     public int totalKills = 0;
     public bool doorOpened;
     public GameObject youDiedText;
+    public Text enemiesRemainingText;
     public Camera maincam;
     private float shakeAmt;
     private Vector3 cameraOrigin;
@@ -37,6 +39,7 @@ public class GameManager : MonoBehaviour {
 
     public void Kill() {
         currentKills++;
+        UpdateKillsRemaining();
     }
 
     private void Update() {
@@ -62,28 +65,40 @@ public class GameManager : MonoBehaviour {
         doorOpened = false;
 
         //if not the start level
-    	if(levelsCompleted > 0){
+        if (levelsCompleted > 0) {
 
-        if (level != null)
-            Destroy(level);
-        activeLevel = levelList[currentLevelIndex];
-        level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
-        
-        currentLevelIndex++;
-        //currentLevelIndex = Random.Range(0, levelList.Count);
+            if (level != null)
+                Destroy(level);
+            activeLevel = levelList[currentLevelIndex];
+            level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
 
-        //get enemies
-        enemyAi = EnemyAi.instances;
+            currentLevelIndex++;
+            //currentLevelIndex = Random.Range(0, levelList.Count);
 
-        totalKills += currentKills;
-        currentKills = 0;
-        player.ResetPosition(activeLevel.spawnPoint);
-        player.GetComponent<ShootingController>().ResetAmmo();
-    	} else{
-    		level = activeLevel.levelPrefab;
-    	}
-    	cameraOrigin = maincam.transform.position;
+            //get enemies
+            enemyAi = EnemyAi.instances;
+
+            totalKills += currentKills;
+            currentKills = 0;
+            player.ResetPosition(activeLevel.spawnPoint);
+            player.GetComponent<ShootingController>().ResetAmmo();
+        }
+        else {
+            level = activeLevel.levelPrefab;
+            doorOpened = true;
+        }
+        cameraOrigin = maincam.transform.position;
+
+        UpdateKillsRemaining();
     }
+
+    private void UpdateKillsRemaining() {
+        enemiesRemainingText.text = "Kills Until Portal Opens: " + Mathf.Max(activeLevel.killsRequired - currentKills, 0);
+        if (currentKills == activeLevel.killsRequired) {
+            doorOpened = true;
+        }
+    }
+
     public void CompleteLevel() {
         levelsCompleted += 1;
         levelTimeSpent = 0f;
@@ -103,9 +118,10 @@ public class GameManager : MonoBehaviour {
         currentKills = 0;
         player.ResetPosition(activeLevel.spawnPoint);
         player.GetComponent<ShootingController>().ResetAmmo();
-        if(BulletLogic.instance != null)
+        if (BulletLogic.instance != null)
             Destroy(BulletLogic.instance.gameObject);
         youDiedText.SetActive(false);
+        UpdateKillsRemaining();
     }
 
     public bool OnLastKill() {
@@ -147,9 +163,6 @@ public class GameManager : MonoBehaviour {
     }
 
     private void OpenDoor() {
-        if (currentKills == activeLevel.killsRequired) {
-            doorOpened = true;
-        }
     }
 
     public void ResetTimeAndCamera() {
@@ -161,37 +174,37 @@ public class GameManager : MonoBehaviour {
     public void PlayerKilled() {
         player.transform.position = new Vector3(1000, player.transform.position.y, 1000);
         youDiedText.SetActive(true);
-        foreach(EnemyAi ai in enemyAi) {
+        foreach (EnemyAi ai in enemyAi) {
             ai.StopSearching();
         }
-        CameraShake(0.1f,0.5f);
+        CameraShake(0.1f, 0.5f);
     }
 
-    public void CameraShake(float shakeAmount){
-    	CameraShake(shakeAmount,0.3f);
+    public void CameraShake(float shakeAmount) {
+        CameraShake(shakeAmount, 0.3f);
     }
 
-    public void CameraShake(float shakeAmount, float shakeTime){
-    	shakeAmt = shakeAmount;
-    	InvokeRepeating("Shake",0,0.01f);
-    	Invoke("StopShake",shakeTime);
+    public void CameraShake(float shakeAmount, float shakeTime) {
+        shakeAmt = shakeAmount;
+        InvokeRepeating("Shake", 0, 0.01f);
+        Invoke("StopShake", shakeTime);
     }
 
-    private void Shake(){
-    	if(shakeAmt > 0f){
-    		Vector3 camPos = maincam.transform.position;
-    		float shakeX = Random.value * shakeAmt * 2 - shakeAmt;
-    		float shakeY = Random.value * shakeAmt * 2 - shakeAmt;
-    		camPos.x += shakeX;
-    		camPos.z += shakeY;
+    private void Shake() {
+        if (shakeAmt > 0f) {
+            Vector3 camPos = maincam.transform.position;
+            float shakeX = Random.value * shakeAmt * 2 - shakeAmt;
+            float shakeY = Random.value * shakeAmt * 2 - shakeAmt;
+            camPos.x += shakeX;
+            camPos.z += shakeY;
 
-    		maincam.transform.position = camPos;
-    	}
+            maincam.transform.position = camPos;
+        }
     }
 
-    private void StopShake(){
-    	CancelInvoke("Shake");
-    	maincam.transform.position = cameraOrigin;
+    private void StopShake() {
+        CancelInvoke("Shake");
+        maincam.transform.position = cameraOrigin;
     }
 }
 

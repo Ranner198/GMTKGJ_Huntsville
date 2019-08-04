@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44716996, g: 0.4970894, b: 0.57514745, a: 1}
+  m_IndirectSpecularColor: {r: 0.44716942, g: 0.4970885, b: 0.5751465, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -303,6 +303,7 @@ RectTransform:
   m_Children:
   - {fileID: 676045822}
   - {fileID: 1520560374}
+  - {fileID: 1659767705}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -381,7 +382,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Shots Left: '
+  m_Text: 'Shots Remaining: '
 --- !u!222 &676045824
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -500,10 +501,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 943190895}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 364a947666903f7449672cdf486303f8, type: 3}
+  m_Script: {fileID: 11500000, guid: 62de09129c53c82478007be9eb789237, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gm: {fileID: 1935430455}
+  particles: {fileID: 1183650998}
 --- !u!65 &943190898
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -645,6 +646,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1183650998 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2559705034488543179, guid: 889fd9b83cb2d434f8c46ba01fe109b1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1851924060}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1288955370 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2559705034488543177, guid: 889fd9b83cb2d434f8c46ba01fe109b1,
@@ -808,6 +815,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1520560373}
   m_CullTransparentMesh: 0
+--- !u!1 &1659767704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1659767705}
+  - component: {fileID: 1659767707}
+  - component: {fileID: 1659767706}
+  m_Layer: 5
+  m_Name: EnemiesRemaining
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1659767705
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659767704}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 617009610}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 747, y: 474.04}
+  m_SizeDelta: {x: 404.79, y: 119.93}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1659767706
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659767704}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 72
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 7
+    m_MaxSize: 72
+    m_Alignment: 2
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 'Kills Until Portal Opens: 0'
+--- !u!222 &1659767707
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1659767704}
+  m_CullTransparentMesh: 0
 --- !u!1001 &1851924060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -937,6 +1023,7 @@ MonoBehaviour:
   totalKills: 0
   doorOpened: 0
   youDiedText: {fileID: 1520560373}
+  enemiesRemainingText: {fileID: 1659767706}
   maincam: {fileID: 963194227}
 --- !u!4 &1935430456
 Transform:
