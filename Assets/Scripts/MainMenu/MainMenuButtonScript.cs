@@ -52,11 +52,13 @@ public class MainMenuButtonScript : MonoBehaviour {
                 currentIndex = i;
         }
 
-        //Add avaliable resolutions
-        resolutionDropDown.AddOptions(avaliableResolutions);
-        //Set Current value ("Size")
-        resolutionDropDown.value = currentIndex;
-        resolutionDropDown.RefreshShownValue();
+        if (resolutionDropDown != null) {
+            //Add avaliable resolutions
+            resolutionDropDown.AddOptions(avaliableResolutions);
+            //Set Current value ("Size")
+            resolutionDropDown.value = currentIndex;
+            resolutionDropDown.RefreshShownValue();
+        }
     }
 
     //Play Button Function
