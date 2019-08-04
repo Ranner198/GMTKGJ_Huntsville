@@ -11,6 +11,7 @@ public class ExitDoor : MonoBehaviour{
     void Start()
     {
         particles.SetActive(false);
+
     }
 
     // Update is called once per frame
