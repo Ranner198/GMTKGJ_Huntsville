@@ -68,7 +68,9 @@ public class GameManager : MonoBehaviour {
             Destroy(level);
         activeLevel = levelList[currentLevelIndex];
         level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
-        currentLevelIndex++;
+        
+        //currentLevelIndex++;
+        currentLevelIndex = Random.Range(0, levelList.Count);
 
         //get enemies
         enemyAi = EnemyAi.instances;

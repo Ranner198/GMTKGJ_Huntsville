@@ -163,6 +163,7 @@ MonoBehaviour:
   totalKills: 0
   doorOpened: 0
   youDiedText: {fileID: 0}
+  maincam: {fileID: 0}
 --- !u!4 &615537161
 Transform:
   m_ObjectHideFlags: 0
