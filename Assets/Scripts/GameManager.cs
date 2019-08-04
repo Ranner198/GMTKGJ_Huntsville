@@ -65,7 +65,7 @@ public class GameManager : MonoBehaviour {
         levelTimeSpent += Time.deltaTime;
         totalTimeSpent += Time.deltaTime;
 
-        totalTimeText.text = "Total Time: " + totalTimeSpent;
+        totalTimeText.text = "Total Time: " + string.Format("{0:0.##}", totalTimeSpent);
 
         //controls checking
         if (Input.GetKeyDown(KeyCode.R))
