@@ -104,11 +104,11 @@ public class GameManager : MonoBehaviour {
 
                 totalKills += currentKills;
                 currentKills = 0;
-                finished = true;
             }
             else {
                 if (level != null)
                     Destroy(level);
+                finished = true;
                 activeLevel = winnerLevel;
                 activeLevel.levelPrefab.SetActive(true);
                 level = activeLevel.levelPrefab;
