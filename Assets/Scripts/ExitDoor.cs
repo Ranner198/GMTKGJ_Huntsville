@@ -5,6 +5,7 @@ using UnityEngine;
 public class ExitDoor : MonoBehaviour{
 
     public GameObject particles;
+    private bool open = false;
 
     // Start is called before the first frame update
     void Start()
@@ -18,15 +19,21 @@ public class ExitDoor : MonoBehaviour{
         if(GameManager.instance.doorOpened)
         {
             particles.SetActive(true);
+            open = true;
         }
         else
         {
             particles.SetActive(false);
+            open = false;
         }
     }
 
     void OnTriggerEnter(Collider other)
     {
+        if (!open) {
+            return;
+        }
+
         if (other.tag == "Player")
         {
             GameManager.instance.CompleteLevel();

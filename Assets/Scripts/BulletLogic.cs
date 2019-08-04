@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BulletLogic : MonoBehaviour
-{
+public class BulletLogic : MonoBehaviour {
     public static BulletLogic instance;
 
     private void Awake() {
-        if(instance != null && instance != this) {
+        if (instance != null && instance != this) {
             Debug.LogError("Ya fucked up A-A-Ron");
             DestroyImmediate(gameObject);
         }
@@ -21,6 +20,12 @@ public class BulletLogic : MonoBehaviour
     public int maxBounces;
     private int totalBounces = 0;
     private Collider[] overlapResults = new Collider[10];
+    public AudioClip ricochetSound;
+    public AudioClip fizzleOutSound;
+    //public GameObject fizzleOut;
+    public AudioSource aud;
+
+    private bool dead = false;
 
     private void Update() {
         PredictTrajectory();
@@ -46,23 +51,30 @@ public class BulletLogic : MonoBehaviour
 
     void Ricochet(Vector3 normal) {
         totalBounces++;
-        if (totalBounces >= maxBounces) {
+        if (totalBounces > maxBounces) {
             GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyBullet());
+            dead = true;
             return;
         }
         float speed = rb.velocity.magnitude;
         var dir = Vector3.Reflect(rb.velocity.normalized, normal);
         rb.velocity = dir * speed;
+        aud.PlayOneShot(ricochetSound);
     }
 
-    private IEnumerator DestroyBullet(){
-        rb.velocity = Vector3.zero;
-        gameObject.GetComponent<SphereCollider>().enabled = false;
-        gameObject.GetComponent<MeshRenderer>().enabled = false;
-        gameObject.GetComponent<TrailRenderer>().emitting = false;
-        yield return new WaitForSeconds(3f);
-        Destroy(gameObject);
+    private IEnumerator DestroyBullet() {
+        if (!dead) {
+            rb.velocity = Vector3.zero;
+            gameObject.GetComponent<SphereCollider>().enabled = false;
+            gameObject.GetComponent<MeshRenderer>().enabled = false;
+            gameObject.GetComponent<TrailRenderer>().emitting = false;
+            //aud.volume = aud.volume * 2;
+            aud.PlayOneShot(fizzleOutSound);
+            //Instantiate(fizzleOut);
+            yield return new WaitForSeconds(3f);
+            Destroy(gameObject);
+        }
     }
 
     List<Transform> enemiesInLine = new List<Transform>();
@@ -77,7 +89,7 @@ public class BulletLogic : MonoBehaviour
         float totalDistance = 0f;
         float maxViewDistance = 10f;
 
-        while(totalDistance < maxViewDistance){
+        while (totalDistance < maxViewDistance) {
             Ray ray = new Ray(movingPosition, direction);
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, maxRayDistance, lm)) {
