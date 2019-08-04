@@ -65,60 +65,36 @@ public class GameManager : MonoBehaviour {
 
         doorOpened = false;
 
-        //if not the start level
         if (levelsCompleted > 0) {
+            if (currentLevelIndex < levelList.Count) {
+                if (level != null)
+                    Destroy(level);
+                activeLevel = levelList[currentLevelIndex];
+                level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
 
-            if (level != null)
-                Destroy(level);
-            activeLevel = levelList[currentLevelIndex];
-            level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
+                currentLevelIndex++;
+                //currentLevelIndex = Random.Range(0, levelList.Count);
 
-            currentLevelIndex++;
-            //currentLevelIndex = Random.Range(0, levelList.Count);
+                //get enemies
+                enemyAi = EnemyAi.instances;
 
-            //get enemies
-            enemyAi = EnemyAi.instances;
-
-            totalKills += currentKills;
-            currentKills = 0;
+                totalKills += currentKills;
+                currentKills = 0;
+            }
+            else {
+                if (level != null)
+                    Destroy(level);
+                activeLevel = winnerLevel;
+                activeLevel.levelPrefab.SetActive(true);
+                level = activeLevel.levelPrefab;
+            }
             player.ResetPosition(activeLevel.spawnPoint);
             player.GetComponent<ShootingController>().ResetAmmo();
         }
         else {
             level = activeLevel.levelPrefab;
-            doorOpened = true;
         }
         cameraOrigin = maincam.transform.position;
-
-        UpdateKillsRemaining();
-    	if(levelsCompleted > 0){
-	    	if(currentLevelIndex < levelList.Count){
-	        if (level != null)
-	            Destroy(level);
-	        activeLevel = levelList[currentLevelIndex];
-	        level = Instantiate(activeLevel.levelPrefab, Vector3.zero, Quaternion.identity);
-	        
-	        currentLevelIndex++;
-	        //currentLevelIndex = Random.Range(0, levelList.Count);
-
-	        //get enemies
-	        enemyAi = EnemyAi.instances;
-
-	        totalKills += currentKills;
-	        currentKills = 0;
-    	} else{
-    		if(level != null)
-    			Destroy(level);
-    		activeLevel = winnerLevel;
-    		activeLevel.levelPrefab.SetActive(true);
-    		level = activeLevel.levelPrefab;
-    	}
-        player.ResetPosition(activeLevel.spawnPoint);
-        player.GetComponent<ShootingController>().ResetAmmo();
-    	} else{
-    		level = activeLevel.levelPrefab;
-    	}
-    	cameraOrigin = maincam.transform.position;
         UpdateKillsRemaining();
     }
 
