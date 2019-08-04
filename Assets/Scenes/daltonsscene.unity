@@ -14233,6 +14233,18 @@ MonoBehaviour:
       type: 3}
     killsRequired: 5
     spawnPoint: {x: 0, y: 1}
+  - levelPrefab: {fileID: 7510391419318012063, guid: c21fb5efda64b984480e94b1cfe2287f,
+      type: 3}
+    killsRequired: 2
+    spawnPoint: {x: 0, y: 0}
+  - levelPrefab: {fileID: 7510391419318012063, guid: bfa7f19a7632c9b45966041005549e59,
+      type: 3}
+    killsRequired: 2
+    spawnPoint: {x: 0, y: 0}
+  - levelPrefab: {fileID: 1063222954577707992, guid: 35d2b96c09ec14c4eabf123ae93af40c,
+      type: 3}
+    killsRequired: 2
+    spawnPoint: {x: 2, y: 1}
   enemyAi: []
   player: {fileID: 0}
   levelsCompleted: 0

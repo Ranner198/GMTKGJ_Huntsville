@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
 
     private void Awake() {
         instance = this;
+        cameraOrigin = maincam.transform.position;
     }
 
 
@@ -104,11 +105,11 @@ public class GameManager : MonoBehaviour {
             }
             player.ResetPosition(activeLevel.spawnPoint);
             player.GetComponent<ShootingController>().ResetAmmo();
+            maincam.transform.position = cameraOrigin;
         }
         else {
             level = activeLevel.levelPrefab;
         }
-        cameraOrigin = maincam.transform.position;
         UpdateKillsRemaining();
     }
 
