@@ -21,6 +21,8 @@ public class BulletLogic : MonoBehaviour
     public int maxBounces;
     private int totalBounces = 0;
     private Collider[] overlapResults = new Collider[10];
+    public AudioClip ricochetSound;
+    public AudioSource aud;
 
     private void Update() {
         PredictTrajectory();
@@ -54,6 +56,7 @@ public class BulletLogic : MonoBehaviour
         float speed = rb.velocity.magnitude;
         var dir = Vector3.Reflect(rb.velocity.normalized, normal);
         rb.velocity = dir * speed;
+        aud.PlayOneShot(ricochetSound);
     }
 
     private IEnumerator DestroyBullet(){
