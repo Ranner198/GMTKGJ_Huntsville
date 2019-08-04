@@ -33,6 +33,7 @@ public class GameManager : MonoBehaviour {
     public int numOfDeaths;
     public Text DeathText;
     public Text totalTimeText;
+    public bool finished = false;
     private void Awake() {
         instance = this;
         cameraOrigin = maincam.transform.position;
@@ -40,6 +41,7 @@ public class GameManager : MonoBehaviour {
 
 
     private void Start() {
+        finished = false;
         player = PlayerMovement.playerInstance;
         NewLevel();
         youDiedText.SetActive(false);
@@ -62,10 +64,13 @@ public class GameManager : MonoBehaviour {
 
     private void Update() {
 
-        levelTimeSpent += Time.deltaTime;
-        totalTimeSpent += Time.deltaTime;
+        if (!finished)
+        {
+            levelTimeSpent += Time.deltaTime;
+            totalTimeSpent += Time.deltaTime;
 
-        totalTimeText.text = "Total Time: " + string.Format("{0:0.##}", totalTimeSpent);
+            totalTimeText.text = "Total Time: " + string.Format("{0:0.##}", totalTimeSpent);
+        }
 
         //controls checking
         if (Input.GetKeyDown(KeyCode.R))
@@ -99,6 +104,7 @@ public class GameManager : MonoBehaviour {
 
                 totalKills += currentKills;
                 currentKills = 0;
+                finished = true;
             }
             else {
                 if (level != null)
