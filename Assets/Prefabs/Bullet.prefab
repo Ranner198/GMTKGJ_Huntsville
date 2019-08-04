@@ -126,7 +126,7 @@ MonoBehaviour:
   lm:
     serializedVersion: 2
     m_Bits: 5120
-  maxBounces: 3
+  maxBounces: 6
 --- !u!96 &5282162613835341053
 TrailRenderer:
   serializedVersion: 2

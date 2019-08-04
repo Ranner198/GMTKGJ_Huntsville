@@ -25,7 +25,7 @@ public class BulletLogic : MonoBehaviour
     private void Update() {
         PredictTrajectory();
         Debug.DrawRay(transform.position, transform.forward * 3, Color.red, Time.deltaTime, false);
-        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.5f, lm)) {
+        if (Physics.Raycast(transform.position, transform.forward, out RaycastHit hit, 0.5f, lm)) {           
             if (hit.transform.tag == "Wall") {
                 Ricochet(hit.normal);
             }
@@ -46,7 +46,7 @@ public class BulletLogic : MonoBehaviour
 
     void Ricochet(Vector3 normal) {
         totalBounces++;
-        if (totalBounces >= maxBounces) {
+        if (totalBounces > maxBounces) {          
             GetComponent<Collider>().enabled = false;
             StartCoroutine(DestroyBullet());
             return;
