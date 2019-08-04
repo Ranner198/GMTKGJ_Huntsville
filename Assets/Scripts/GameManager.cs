@@ -66,10 +66,10 @@ public class GameManager : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.R))
             ResetLevel();
         if (Input.GetKeyDown(KeyCode.K)) {
-            enemyAi[Random.Range(0, enemyAi.Count)].Kill(0);
+            //enemyAi[Random.Range(0, enemyAi.Count)].Kill(0);
         }
         if (Input.GetKeyDown(KeyCode.N)) {
-            CompleteLevel();
+            //CompleteLevel();
         }
     }
 
@@ -143,7 +143,9 @@ public class GameManager : MonoBehaviour {
             Destroy(BulletLogic.instance.gameObject);
         youDiedText.SetActive(false);
         UpdateKillsRemaining();
-        doorOpened = false;
+        if(levelsCompleted > 0) {
+            doorOpened = false;
+        }
         levelScore = 0;
         scoreText.text = "Score :" + totalScore;
     }
